@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Colocation extends Model
 {
@@ -14,6 +15,18 @@ class Colocation extends Model
         'description',
     ];
 
+    public function generateInvitationToken(){
+        return Str::random(32);
+    }
+
+    public function createInvitation(string $email): Invitation{
+        return $this->invitations()->create([
+            'token' => $this->generateInvitationToken(),
+            'email' => $email,
+            'status' => 'pending',
+            'expires_at' => now()->addDays(7),
+        ]);    
+        }
 
     public function owner(){
         return $this->belongsTo(User::class , 'owner_id');
@@ -53,4 +66,9 @@ class Colocation extends Model
         return $this->status === 'active';
     }
 
+    public function memberships(){
+        return $this->hasMany(Membership::class);
+    }
+
+    
     }
