@@ -6,8 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Colocation extends Model
 {
-    //
-
+        
+    protected $fillable = [
+        'name',
+        'owner_id',
+        'status',
+        'description',
+    ];
 
 
     public function owner(){
@@ -36,6 +41,16 @@ class Colocation extends Model
 
     public function invitations(){
         return $this->hasMany(Invitation::class);
+    }
+
+    public function getActiveMembersCount(): int
+    {
+        return $this->activeMembers()->count();
+    }
+
+    public function isActive(): bool
+    {
+        return $this->status === 'active';
     }
 
     }
