@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Services\BalanceService;
 
 class Membership extends Model
 {
@@ -23,4 +24,6 @@ class Membership extends Model
     {
         return $this->belongsTo(Colocation::class);
     }
+
+   
 }

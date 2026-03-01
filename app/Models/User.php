@@ -46,6 +46,7 @@ class User extends Authenticatable
         ];
     }
 
+
     public function memberships()
     {
         return $this->hasMany(Membership::class);
@@ -73,4 +74,7 @@ public function hasActiveColocation(): bool
         ->whereNull('left_at')
         ->exists();
 }
+
+
+
 }
