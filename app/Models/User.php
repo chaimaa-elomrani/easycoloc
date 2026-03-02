@@ -75,6 +75,21 @@ public function hasActiveColocation(): bool
         ->exists();
 }
 
+public function colocations()
+{
+    return $this->belongsToMany(Colocation::class, 'memberships')
+                ->withPivot('role', 'joined_at', 'left_at')
+                ->withTimestamps();
+}
 
+public function activeColocations()
+{
+    return $this->colocations()->wherePivotNull('left_at');
+}
+
+public function ownedColocations()
+{
+    return $this->hasMany(Colocation::class, 'owner_id');
+}
 
 }

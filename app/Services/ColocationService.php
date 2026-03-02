@@ -5,15 +5,22 @@ use Illuminate\Support\Facades\Auth;
 class ColocationService
 {
 
-    public function create(array $data): Colocation{
-        $data['owner_id'] = Auth::id();
-        $data['status'] = 'active'; 
+ public function create(array $data): Colocation
+{
+    $data['owner_id'] = Auth::id();
+    $data['status']   = 'active';
 
-        return Colocation::create($data);
-    }
+    $colocation = Colocation::create($data);
 
+    $colocation->members()->attach(Auth::id(), [
+        'role'      => 'owner',
+        'joined_at' => now(),
+    ]);
 
-    public function update(Colocation $colocation, array $data ){
+    return $colocation;
+}
+
+    public function update(Colocation $colocation, array $data ):bool{
         return $colocation->update($data); 
     }
 

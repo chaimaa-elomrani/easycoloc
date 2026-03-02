@@ -1,0 +1,41 @@
+[90m= [39m[34;4mIlluminate\Database\Eloquent\Collection[39;24m {#6664
+    [34mall[39m: [
+      [34;4mApp\Models\Colocation[39;24m {#6265
+        [34mid[39m: [35m1[39m,
+        [34mname[39m: "[32mTest Coloc[39m",
+        [34mowner_id[39m: [35m1[39m,
+        [34mstatus[39m: "[32mactive[39m",
+        [34mdescription[39m: [36mnull[39m,
+        [34mcreated_at[39m: "[32m2026-02-27 15:55:25[39m",
+        [34mupdated_at[39m: "[32m2026-02-27 15:55:25[39m",
+        [34mpivot[39m: [34;4mIlluminate\Database\Eloquent\Relations\Pivot[39;24m {#6136
+          [34muser_id[39m: [35m1[39m,
+          [34mcolocation_id[39m: [35m1[39m,
+          [34mrole[39m: "[32mmember[39m",
+          [34mjoined_at[39m: "[32m2026-02-28 13:52:34[39m",
+          [34mleft_at[39m: "[32m2026-03-01 14:45:27[39m",
+          [34mcreated_at[39m: "[32m2026-02-28 13:52:34[39m",
+          [34mupdated_at[39m: "[32m2026-03-01 14:45:27[39m",
+        },
+      },
+      [34;4mApp\Models\Colocation[39;24m {#6132
+        [34mid[39m: [35m3[39m,
+        [34mname[39m: "[32mTest Tinker 2[39m",
+        [34mowner_id[39m: [35m1[39m,
+        [34mstatus[39m: "[32mactive[39m",
+        [34mdescription[39m: "[32mtest via tinker[39m",
+        [34mcreated_at[39m: "[32m2026-03-02 05:38:57[39m",
+        [34mupdated_at[39m: "[32m2026-03-02 05:38:57[39m",
+        [34mpivot[39m: [34;4mIlluminate\Database\Eloquent\Relations\Pivot[39;24m {#6665
+          [34muser_id[39m: [35m1[39m,
+          [34mcolocation_id[39m: [35m3[39m,
+          [34mrole[39m: "[32mowner[39m",
+          [34mjoined_at[39m: "[32m2026-03-02 05:39:20[39m",
+          [34mleft_at[39m: [36mnull[39m,
+          [34mcreated_at[39m: [36mnull[39m,
+          [34mupdated_at[39m: [36mnull[39m,
+        },
+      },
+    ],
+  }
+
