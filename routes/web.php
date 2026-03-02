@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ColocationController;
+use App\Http\Controllers\MembershipController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -27,6 +28,10 @@ Route::middleware('auth')->group(function () {
     Route::put('/colocations/{colocation}', [ColocationController::class, 'update'])->name('colocations.update');
     Route::post('/colocations/{colocation}/cancel', [ColocationController::class, 'cancel'])->name('colocations.cancel');
     Route::delete('/colocations/{colocation}', [ColocationController::class, 'destroy'])->name('colocations.destroy');
+
+
+    Route::post('/colocations/{colocation}/leave', [MembershipController::class, 'leave'])->name('memberships.leave');
+Route::post('/colocations/{colocation}/remove/{userId}', [MembershipController::class, 'remove'])->name('memberships.remove');
 });
 
 require __DIR__.'/auth.php';

@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Membership;
 
 class MembershipService
 {
@@ -25,5 +26,10 @@ class MembershipService
             ->first();
     }
 
-    
+    public function leave(Membership $membership): bool
+{
+    return $membership->update([
+        'left_at' => now(),
+    ]);
+}
 }
