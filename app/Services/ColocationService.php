@@ -27,7 +27,6 @@ class ColocationService
     public function cancel(Colocation $colocation){
         return $colocation->update([
             'status' => 'cancelled',
-            'cancelled_at' => now(),
         ]);
     }
 

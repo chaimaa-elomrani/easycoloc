@@ -7,6 +7,7 @@ use App\Services\ColocationService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Services\MembershipService;
 
 class ColocationController extends Controller
 {
@@ -25,11 +26,26 @@ class ColocationController extends Controller
     }
     
 
-    public function create(){
-        return view('colocations.create');
+  public function create()
+{
+    $membershipService = app(MembershipService::class);
+
+    if ($membershipService->hasActiveMembership()) {
+        return redirect()->route('colocations.index')
+            ->with('error', 'Vous êtes déjà dans une colocation active.');
     }
 
+    return view('colocations.create');
+}
+
     public function store(Request $request){
+        $membershipService = app(MembershipService::class);
+
+    if ($membershipService->hasActiveMembership()) {
+        return redirect()->back()
+            ->with('error', 'Vous ne pouvez rejoindre ou créer qu\'une seule colocation active à la fois.');
+    }
+    
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string|max:1000',
