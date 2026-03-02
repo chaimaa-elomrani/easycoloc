@@ -13,37 +13,24 @@ class Colocation extends Model
         'owner_id',
         'status',
         'description',
+        'cancelled_at',
     ];
 
-    public function generateInvitationToken(){
-        return Str::random(32);
-    }
-
-    public function createInvitation(string $email): Invitation{
-        return $this->invitations()->create([
-            'token' => $this->generateInvitationToken(),
-            'email' => $email,
-            'status' => 'pending',
-            'expires_at' => now()->addDays(7),
-        ]);    
-        }
-
-
+    
     public function owner(){
         return $this->belongsTo(User::class , 'owner_id');
+    }
+    public function memberships(){
+        return $this->hasMany(Membership::class);
     }
 
     public function members(){
         return $this->belongsToMany(User::class , 'memberships')->withPivot('role', 'joined_at' , 'left_at');
     }
 
-    public function activeMembers()
-{
-    return $this->members()
-        ->whereNull('left_at')
-        ->where('memberships.role', 'member') 
-        ->orWhere('memberships.user_id', $this->owner_id); 
-}
+    public function activeMembers() {
+        return $this->members()->whereNull('left_at');
+    }
 
     public function expenses(){
         return $this->hasMany(Expense::class);
@@ -51,7 +38,7 @@ class Colocation extends Model
 
     public function categories(){
         return $this->hasMany(Category::class);
-    }
+        }
 
     public function settlements(){
         return $this->hasMany(Settlement::class);
@@ -71,9 +58,6 @@ class Colocation extends Model
         return $this->status === 'active';
     }
 
-    public function memberships(){
-        return $this->hasMany(Membership::class);
-    }
 
 
     }

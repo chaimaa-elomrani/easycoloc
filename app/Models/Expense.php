@@ -16,6 +16,13 @@ class Expense extends Model
   ];
 
 
+    public function scopeForMonth($query, $month = null)
+    {
+        if ($month) {
+            $query->whereMonth('date', $month->month)
+                ->whereYear('date', $month->year);
+        }
+    }
   
     public function colocation()
     {
