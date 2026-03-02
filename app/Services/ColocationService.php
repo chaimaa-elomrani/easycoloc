@@ -22,7 +22,10 @@ class ColocationService
             'status' => 'cancelled',
             'cancelled_at' => now(),
         ]);
+    }
 
+    public function destroy(Colocation $colocation){
+        return $colocation->delete();
     }
 
 }
