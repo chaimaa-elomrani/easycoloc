@@ -51,4 +51,6 @@
     @else
         <p>Aucun membre actif pour le moment.</p>
     @endif
+
+    @include('partials.invitateForm')
 </div>

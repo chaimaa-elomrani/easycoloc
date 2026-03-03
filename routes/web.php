@@ -31,7 +31,20 @@ Route::middleware('auth')->group(function () {
 
 
     Route::post('/colocations/{colocation}/leave', [MembershipController::class, 'leave'])->name('memberships.leave');
-Route::post('/colocations/{colocation}/remove/{userId}', [MembershipController::class, 'remove'])->name('memberships.remove');
+    Route::post('/colocations/{colocation}/remove/{userId}', [MembershipController::class, 'remove'])->name('memberships.remove');
+
+
+    Route::post('/colocations/{colocation}/invitations', [InvitationController::class, 'store'])
+        ->name('invitations.store');
+
+    Route::get('/invitations/{token}', [InvitationController::class, 'show'])
+        ->name('invitations.show');
+
+    Route::post('/invitations/{invitation}/accept', [InvitationController::class, 'accept'])
+        ->name('invitations.accept');
+
+    Route::post('/invitations/{invitation}/refuse', [InvitationController::class, 'refuse'])
+        ->name('invitations.refuse');
 });
 
 require __DIR__.'/auth.php';
